@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>854</width>
+    <height>695</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MiniPS</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="2">
+     <widget class="QFrame" name="derzhalka">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="unit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res.qrc">
+           <normaloff>:/res/obed.png</normaloff>:/res/obed.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="addsloy">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res.qrc">
+           <normaloff>:/res/plus.png</normaloff>:/res/plus.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="4">
+        <widget class="QGroupBox" name="br_oth">
+         <property name="minimumSize">
+          <size>
+           <width>261</width>
+           <height>161</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>700</width>
+           <height>300</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Кисти</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="copy_but">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../res.qrc">
+           <normaloff>:/res/copy.png</normaloff>:/res/copy.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QFrame" name="Miniholst">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>4</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="File">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>File 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="3">
+     <widget class="QScrollArea" name="HolstPlace">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>10</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(179, 179, 179);</string>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>491</width>
+         <height>585</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="2" rowspan="2">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>262</width>
+         <height>208</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="SloyWidget_layout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>854</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="file">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="open"/>
+    <addaction name="separator"/>
+    <addaction name="save"/>
+    <addaction name="separator"/>
+    <addaction name="exit"/>
+   </widget>
+   <widget class="QMenu" name="holst">
+    <property name="title">
+     <string>Холст</string>
+    </property>
+    <addaction name="otrazhv"/>
+    <addaction name="otrazhg"/>
+    <addaction name="separator"/>
+    <addaction name="razpo"/>
+    <addaction name="razpr"/>
+   </widget>
+   <widget class="QMenu" name="sloy">
+    <property name="title">
+     <string>Слой</string>
+    </property>
+    <addaction name="copy"/>
+    <addaction name="paste"/>
+    <addaction name="separator"/>
+    <addaction name="delmenu"/>
+    <addaction name="separator"/>
+    <addaction name="clear"/>
+   </widget>
+   <widget class="QMenu" name="filter">
+    <property name="title">
+     <string>Фильтр</string>
+    </property>
+    <widget class="QMenu" name="col">
+     <property name="title">
+      <string>Регулировка цвета</string>
+     </property>
+     <addaction name="bright"/>
+     <addaction name="colr"/>
+    </widget>
+    <addaction name="col"/>
+    <addaction name="blur"/>
+   </widget>
+   <widget class="QMenu" name="eff">
+    <property name="title">
+     <string>Эффекты</string>
+    </property>
+    <addaction name="glitch"/>
+   </widget>
+   <widget class="QMenu" name="st">
+    <property name="title">
+     <string>Стикеры</string>
+    </property>
+    <addaction name="stadd"/>
+   </widget>
+   <addaction name="file"/>
+   <addaction name="holst"/>
+   <addaction name="sloy"/>
+   <addaction name="filter"/>
+   <addaction name="eff"/>
+   <addaction name="st"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="open">
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="save">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="exit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="otrazhv">
+   <property name="text">
+    <string>Отразить горизонтально</string>
+   </property>
+  </action>
+  <action name="otrazhg">
+   <property name="text">
+    <string>Отразить вертикально</string>
+   </property>
+  </action>
+  <action name="razpo">
+   <property name="text">
+    <string>Повернуть на 90° по часовой</string>
+   </property>
+  </action>
+  <action name="razpr">
+   <property name="text">
+    <string>Повернуть на 90° против часовой</string>
+   </property>
+  </action>
+  <action name="copy">
+   <property name="text">
+    <string>Копировать</string>
+   </property>
+  </action>
+  <action name="paste">
+   <property name="text">
+    <string>Вставить</string>
+   </property>
+  </action>
+  <action name="delmenu">
+   <property name="text">
+    <string>Удалить</string>
+   </property>
+  </action>
+  <action name="clear">
+   <property name="text">
+    <string>Очистить слой</string>
+   </property>
+  </action>
+  <action name="bright">
+   <property name="text">
+    <string>Яркость/Насыщенность</string>
+   </property>
+  </action>
+  <action name="colr">
+   <property name="text">
+    <string>Цвет</string>
+   </property>
+  </action>
+  <action name="blur">
+   <property name="text">
+    <string>Размытие по Гауссу</string>
+   </property>
+  </action>
+  <action name="glitch">
+   <property name="text">
+    <string>Глитч эффекты</string>
+   </property>
+  </action>
+  <action name="stadd">
+   <property name="text">
+    <string>Добавить стикер</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Создать</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>Сохранить как...</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../res.qrc"/>
+  <include location="../res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
