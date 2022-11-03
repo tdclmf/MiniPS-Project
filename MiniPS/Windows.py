@@ -3,7 +3,8 @@ import getpass
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 from PySide6.QtGui import *
-
+from PIL import Image
+from collections import deque
 from mainw import Ui_MainWindow
 from sloywidget import SloiWidget
 from bcs import Ui_BCSwindow
@@ -12,6 +13,28 @@ from blur import Ui_Blur
 from glitch import Ui_glitchwindow
 
 files = {}
+
+
+def rgb_shift(image, offset, channel):
+    channels = ['r', 'g', 'b']
+    offset = 5
+    for i in channels:
+        channels = ['r', 'g', 'b']
+        offset = 5
+        for i in channels:
+            offset += 5
+            image = Image.open(image) # заменить
+            image = image.convert('RGB')
+            image.load()
+            r, g, b = image.split()
+            eval_getdata = i + ".getdata()"
+            channel_data = eval(eval_getdata)
+            channel_deque = deque(channel_data)
+            channel_deque.rotate(offset)
+            eval_putdata = i + ".putdata(channel_deque)"
+            eval(eval_putdata)
+            image = Image.merge('RGB', (r, g, b))
+            # image.save(image) заменить
 
 
 class BCSwindow(QDialog):
@@ -65,17 +88,7 @@ class Glitchwindow(QDialog):
 class MainWindow(QMainWindow):
 
     def __init__(self):
-        self.pixmaped = 0
         super(MainWindow, self).__init__()
-        self.scale = 1
-        self.opacity_effect = QGraphicsOpacityEffect()
-        self.layer_ids = {}
-        self.layer_id = 0
-        self.filesid = 0
-        self.pixmaps = []
-        self.layers = {}
-        self.im = None
-        self.pixmap = None
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.counter_id = 0
@@ -94,39 +107,24 @@ class MainWindow(QMainWindow):
         self.ui.addsloy.setEnabled(False)
         self.ui.copy_but.setEnabled(False)
         self.ui.unit.setEnabled(False)
+        self.layers = []
+        self.ui.canvas.setScene(self.scene)
 
     @Slot()
     def addsloywidget(self):
         self.counter_id += 1
         slwidget = SloiWidget(self.counter_id)
         self.ui.SloyWidget_layout.addWidget(slwidget)
-        self.layers[slwidget.id_widget] = QLabel(self.ui.scrollAreaWidgetContents_2)
-        self.layers[slwidget.id_widget].setObjectName(u"canvas")
-        self.layers[slwidget.id_widget].setSizePolicy(self.ui.sizePolicy4)
-        self.layers[slwidget.id_widget].setMaximumSize(QSize(16777215, 16777215))
-        self.layers[slwidget.id_widget].setStyleSheet(u"background-color: rgba(0, 0, 0, 0));")
-        self.ui.gridLayout_4.addWidget(self.layers[slwidget.id_widget], 0, 0, 1, 1)
         slwidget.delete.connect(self.delete_sloy)
 
     @Slot(int)
     def delete_sloy(self):
         widget = self.sender()
-        if self.counter_id > 1:
-            self.counter_id -= 1
-            self.ui.SloyWidget_layout.removeWidget(widget)
-            self.layers[widget.id_widget].hide()
-            del self.pixmaps[widget.id_widget]
-            del self.layers[widget.id_widget]
-            widget.deleteLater()
-        else:
-            self.ui.SloyWidget_layout.removeWidget(widget)
-            self.counter_id -= 1
-            self.ui.addsloy.setEnabled(False)
-            self.ui.copy_but.setEnabled(False)
-            self.ui.unit.setEnabled(False)
-            widget.deleteLater()
-            for i in self.layers:
-                self.layers[i].clear()
+        self.counter_id -= 1
+        self.ui.SloyWidget_layout.removeWidget(widget)
+        self.scene.removeItem(self.layers[widget.id_widget - 1])
+        del self.layers[widget.id_widget - 1]
+        widget.deleteLater()
 
     @Slot()
     def ex(self, action):
@@ -170,32 +168,29 @@ class MainWindow(QMainWindow):
             dialog.deleteLater()
 
     def openfile(self, action):
-        self.pixmaped += 1
         if action == self.ui.open:
             fname = QFileDialog.getOpenFileName(self, "Open file", f"c:\\Users\\{getpass.getuser()}\\Desktop.",
                                                 "Images (*.jpg *png *jpeg)")
-        if fname:
-            pic = QGraphicsPixmapItem()
-            pic.setPixmap(QPixmap(fname[0]))
-            pic.setFlags(QGraphicsItem.ItemIsSelectable | QGraphicsItem.ItemIsMovable)
-            self.scene.addItem(pic)
-            print(self.ui.canvas.setScene(self.scene))
-            self.scale_pic = 1
+            if fname:
+                self.addsloywidget()
+                pic = QGraphicsPixmapItem()
+                pic.setPixmap(QPixmap(fname[0]))
+                if self.counter_id != 1:
+                    pic.setFlags(QGraphicsItem.ItemIsSelectable | QGraphicsItem.ItemIsMovable)
+                self.layers.append(pic)
+                self.scene.addItem(self.layers[self.counter_id - 1])
+                self.scale_pic = 1
+
 
     def on_zoom_in(self, action):
         if action == self.ui.zoomin:
             self.scale_pic += 0.3
             self.ui.canvas.scale(self.scale_pic, self.scale_pic)
             self.scale_pic = 1
-            print(self.scale_pic)
 
     def on_zoom_out(self, action):
         if action == self.ui.zoomout:
             self.scale_pic -= 0.3
             self.ui.canvas.scale(self.scale_pic, self.scale_pic)
             self.scale_pic = 1
-            print(self.scale_pic)
-
-    def resize_image(self):
-        pass
 
