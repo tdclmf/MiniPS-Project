@@ -16,8 +16,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGraphicsView, QGridLayout,
-    QGroupBox, QLayout, QMainWindow, QMenu,
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
+    QLabel, QLayout, QMainWindow, QMenu,
     QMenuBar, QPushButton, QScrollArea, QSizePolicy,
     QSpacerItem, QStatusBar, QVBoxLayout, QWidget)
 import res_rc
@@ -130,32 +130,75 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.copy_but, 1, 2, 1, 1)
 
 
-        self.gridLayout.addWidget(self.derzhalka, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.derzhalka, 1, 2, 1, 1)
+
+        self.Miniholst = QFrame(self.centralwidget)
+        self.Miniholst.setObjectName(u"Miniholst")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(4)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.Miniholst.sizePolicy().hasHeightForWidth())
+        self.Miniholst.setSizePolicy(sizePolicy2)
+        self.Miniholst.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.Miniholst.setFrameShape(QFrame.StyledPanel)
+        self.Miniholst.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.Miniholst, 0, 2, 1, 1)
 
         self.File = QPushButton(self.centralwidget)
         self.File.setObjectName(u"File")
         sizePolicy1.setHeightForWidth(self.File.sizePolicy().hasHeightForWidth())
         self.File.setSizePolicy(sizePolicy1)
 
-        self.gridLayout.addWidget(self.File, 4, 0, 1, 1)
+        self.gridLayout.addWidget(self.File, 3, 0, 1, 1)
+
+        self.HolstPlace = QScrollArea(self.centralwidget)
+        self.HolstPlace.setObjectName(u"HolstPlace")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy3.setHorizontalStretch(10)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.HolstPlace.sizePolicy().hasHeightForWidth())
+        self.HolstPlace.setSizePolicy(sizePolicy3)
+        self.HolstPlace.setStyleSheet(u"background-color: rgb(179, 179, 179);")
+        self.HolstPlace.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_2 = QWidget()
+        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1315, 970))
+        self.gridLayout_4 = QGridLayout(self.scrollAreaWidgetContents_2)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.canvas = QLabel(self.scrollAreaWidgetContents_2)
+        self.canvas.setObjectName(u"canvas")
+        self.sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.sizePolicy4.setHorizontalStretch(0)
+        self.sizePolicy4.setVerticalStretch(0)
+        self.sizePolicy4.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
+        self.canvas.setSizePolicy(self.sizePolicy4)
+        self.canvas.setMaximumSize(QSize(16777215, 16777215))
+        self.canvas.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+
+        self.gridLayout_4.addWidget(self.canvas, 0, 0, 1, 1)
+
+        self.HolstPlace.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.gridLayout.addWidget(self.HolstPlace, 0, 0, 3, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout.addItem(self.horizontalSpacer, 2, 1, 1, 1)
+        self.gridLayout.addItem(self.horizontalSpacer, 1, 1, 1, 1)
 
         self.scrollArea = QScrollArea(self.centralwidget)
         self.scrollArea.setObjectName(u"scrollArea")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
-        self.scrollArea.setSizePolicy(sizePolicy2)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy5)
         self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 504, 272))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 504, 352))
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.SloyWidget_layout = QVBoxLayout()
@@ -166,33 +209,7 @@ class Ui_MainWindow(object):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.gridLayout.addWidget(self.scrollArea, 3, 2, 2, 1)
-
-        self.canvas = QGraphicsView(self.centralwidget)
-        self.canvas.setObjectName(u"canvas")
-        self.canvas.setEnabled(True)
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy3.setHorizontalStretch(10)
-        sizePolicy3.setVerticalStretch(12)
-        sizePolicy3.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
-        self.canvas.setSizePolicy(sizePolicy3)
-        self.canvas.setAcceptDrops(False)
-        self.canvas.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-
-        self.gridLayout.addWidget(self.canvas, 0, 0, 4, 1)
-
-        self.Miniholst = QFrame(self.centralwidget)
-        self.Miniholst.setObjectName(u"Miniholst")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy4.setHorizontalStretch(4)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.Miniholst.sizePolicy().hasHeightForWidth())
-        self.Miniholst.setSizePolicy(sizePolicy4)
-        self.Miniholst.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.Miniholst.setFrameShape(QFrame.StyledPanel)
-        self.Miniholst.setFrameShadow(QFrame.Raised)
-
-        self.gridLayout.addWidget(self.Miniholst, 0, 2, 2, 1)
+        self.gridLayout.addWidget(self.scrollArea, 2, 2, 2, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -280,6 +297,7 @@ class Ui_MainWindow(object):
         self.br_oth.setTitle(QCoreApplication.translate("MainWindow", u"\u041a\u0438\u0441\u0442\u0438", None))
         self.copy_but.setText("")
         self.File.setText(QCoreApplication.translate("MainWindow", u"File 1", None))
+        self.canvas.setText("")
         self.file.setTitle(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b", None))
         self.holst.setTitle(QCoreApplication.translate("MainWindow", u"\u0425\u043e\u043b\u0441\u0442", None))
         self.sloy.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043b\u043e\u0439", None))
