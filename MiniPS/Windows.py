@@ -3,7 +3,7 @@ import getpass
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 from PySide6.QtGui import *
-from PIL import Image
+from PIL import Image, ImageFilter, ImageEnhance, ImageQt
 from collections import deque
 from mainw import Ui_MainWindow
 from sloywidget import SloiWidget
@@ -11,13 +11,11 @@ from bcs import Ui_BCSwindow
 from col import Ui_colwindow
 from blur import Ui_Blur
 from glitch import Ui_glitchwindow
-
 files = {}
 
 
 def rgb_shift(image, offset, channel):
     channels = ['r', 'g', 'b']
-    offset = 5
     for i in channels:
         channels = ['r', 'g', 'b']
         offset = 5
@@ -36,6 +34,32 @@ def rgb_shift(image, offset, channel):
             image = Image.merge('RGB', (r, g, b))
             # image.save(image) заменить
 
+def blur(image, radius):
+    # image = Image.open(image)  заменить
+    # image = image.convert('RGB')
+    # image.load()
+    image.filter(ImageFilter.GaussianBlur(radius=radius))
+
+def contrast(image, factor):
+    # image = Image.open(image)  заменить
+    # image = image.convert('RGB')
+    # image.load()
+    filter = ImageEnhance.Contrast(image)
+    new_image = image.filter(factor)
+
+def sat(image, factor):
+    # image = Image.open(image)  заменить
+    # image = image.convert('RGB')
+    # image.load()
+    filter = ImageEnhance.Color(image)
+    new_image = image.filter(factor)
+
+def brightness(image, factor):
+    # image = Image.open(image)  заменить
+    # image = image.convert('RGB')
+    # image.load()
+    filter = ImageEnhance.Brightness(image)
+    new_image = image.filter(factor)
 
 class BCSwindow(QDialog):
 
@@ -107,8 +131,9 @@ class MainWindow(QMainWindow):
         self.ui.addsloy.setEnabled(False)
         self.ui.copy_but.setEnabled(False)
         self.ui.unit.setEnabled(False)
-        self.layers = []
+        self.layers = {}
         self.ui.canvas.setScene(self.scene)
+        self.current_layer = None
 
     @Slot()
     def addsloywidget(self):
@@ -122,8 +147,8 @@ class MainWindow(QMainWindow):
         widget = self.sender()
         self.counter_id -= 1
         self.ui.SloyWidget_layout.removeWidget(widget)
-        self.scene.removeItem(self.layers[widget.id_widget - 1])
-        del self.layers[widget.id_widget - 1]
+        self.scene.removeItem(self.layers[widget.id_widget])
+        del self.layers[widget.id_widget]
         widget.deleteLater()
 
     @Slot()
@@ -177,8 +202,8 @@ class MainWindow(QMainWindow):
                 pic.setPixmap(QPixmap(fname[0]))
                 if self.counter_id != 1:
                     pic.setFlags(QGraphicsItem.ItemIsSelectable | QGraphicsItem.ItemIsMovable)
-                self.layers.append(pic)
-                self.scene.addItem(self.layers[self.counter_id - 1])
+                self.layers[self.counter_id] = pic
+                self.scene.addItem(self.layers[self.counter_id])
                 self.scale_pic = 1
 
 
