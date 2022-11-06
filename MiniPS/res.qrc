@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="/">
-    <file>res/copy.png</file>
-    <file>res/obed.png</file>
-    <file>res/plus.png</file>
-    <file>res/vector-line-black-icon.jpg</file>
-  </qresource>
-</RCC>
