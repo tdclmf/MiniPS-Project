@@ -148,7 +148,7 @@ class MainWindow(QMainWindow):
         slwidget.delete.connect(self.delete_sloy)
 
     @Slot(int)
-    def current_layer(self):
+    def curlayer(self):
         widget = self.sender()
         self.current_layer = widget
         print(self.current_layer)
