@@ -12,8 +12,6 @@ from col import Ui_colwindow
 from blur import Ui_Blur
 from glitch import Ui_glitchwindow
 
-files = {}
-
 
 def rgb_shift(image, offset, channel):
     channels = ['r', 'g', 'b']
@@ -122,7 +120,6 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.counter_id = 0
-        self.ui.addsloy.clicked.connect(self.addsloywidget)
         self.ui.file.triggered.connect(self.ex)
         self.ui.filter.triggered.connect(self.br)
         self.ui.filter.triggered.connect(self.color)
@@ -131,14 +128,16 @@ class MainWindow(QMainWindow):
         self.ui.file.triggered.connect(self.openfile)
         self.ui.holst.triggered.connect(self.on_zoom_in)
         self.ui.holst.triggered.connect(self.on_zoom_out)
+        self.layers_pillow = {}
         self.ui.zoomin.setShortcut('Ctrl+=')
         self.ui.zoomout.setShortcut('Ctrl+-')
         self.scene = QGraphicsScene()
-        self.ui.addsloy.setEnabled(False)
-        self.ui.copy_but.setEnabled(False)
-        self.ui.unit.setEnabled(False)
+        self.canvas = Image.new('RGBA', size = (1000, 1000),
+                           color = (255, 255, 255))
         self.layers = {}
         self.ui.canvas.setScene(self.scene)
+        self.pic = QGraphicsPixmapItem()
+        self.scene.addItem(self.pic)
         self.current_layer = None
 
     @Slot()
@@ -149,12 +148,19 @@ class MainWindow(QMainWindow):
         slwidget.delete.connect(self.delete_sloy)
 
     @Slot(int)
+    def current_layer(self):
+        widget = self.sender()
+        self.current_layer = widget
+        print(self.current_layer)
+
+    @Slot(int)
     def delete_sloy(self):
         widget = self.sender()
         self.counter_id -= 1
         self.ui.SloyWidget_layout.removeWidget(widget)
-        self.scene.removeItem(self.layers[widget.id_widget])
-        del self.layers[widget.id_widget]
+        del self.layers_pillow[widget.id_widget]
+        print(self.layers_pillow)
+        self.update_canvas()
         widget.deleteLater()
 
     @Slot()
@@ -204,12 +210,8 @@ class MainWindow(QMainWindow):
                                                 "Images (*.jpg *png *jpeg)")
             if fname:
                 self.addsloywidget()
-                pic = QGraphicsPixmapItem()
-                pic.setPixmap(QPixmap(fname[0]))
-                if self.counter_id != 1:
-                    pic.setFlags(QGraphicsItem.ItemIsSelectable | QGraphicsItem.ItemIsMovable)
-                self.layers[self.counter_id] = pic
-                self.scene.addItem(self.layers[self.counter_id])
+                self.layers_pillow[self.counter_id] = Image.open(fname[0])
+                self.update_canvas()
                 self.scale_pic = 1
 
     def on_zoom_in(self, action):
@@ -223,3 +225,19 @@ class MainWindow(QMainWindow):
             self.scale_pic -= 0.3
             self.ui.canvas.scale(self.scale_pic, self.scale_pic)
             self.scale_pic = 1
+
+    def update_canvas(self):
+        if not self.layers_pillow:
+            self.scene.clear()
+            self.pic = QGraphicsPixmapItem()
+            self.scene.addItem(self.pic)
+        else:
+            self.new_canvas = self.canvas.copy()
+            for key, val in self.layers_pillow.items():
+                if key == 1:
+                    self.canvas = self.canvas.resize(val.size)
+                    self.new_canvas = self.new_canvas.resize(val.size)
+                self.new_canvas.paste(val)
+            self.pic.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.new_canvas)))
+
+

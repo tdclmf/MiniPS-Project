@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>854</width>
-    <height>695</height>
+    <width>992</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,7 +21,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="2">
+    <item row="2" column="2">
      <widget class="QFrame" name="derzhalka">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -29,187 +29,18 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="1">
-        <widget class="QPushButton" name="unit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="movelayer">
          <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res.qrc">
-           <normaloff>:/res/obed.png</normaloff>:/res/obed.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="addsloy">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res.qrc">
-           <normaloff>:/res/plus.png</normaloff>:/res/plus.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="4">
-        <widget class="QGroupBox" name="br_oth">
-         <property name="minimumSize">
-          <size>
-           <width>261</width>
-           <height>161</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>700</width>
-           <height>300</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>Кисти</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="copy_but">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../res.qrc">
-           <normaloff>:/res/copy.png</normaloff>:/res/copy.png</iconset>
+          <string>Перемещение слоя</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="QFrame" name="Miniholst">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-        <horstretch>4</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="File">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>File 1</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" rowspan="3">
-     <widget class="QScrollArea" name="HolstPlace">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>10</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(179, 179, 179);</string>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>491</width>
-         <height>585</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
-    <item row="1" column="1">
+    <item row="2" column="1">
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -222,7 +53,7 @@
       </property>
      </spacer>
     </item>
-    <item row="2" column="2" rowspan="2">
+    <item row="3" column="2" rowspan="2">
      <widget class="QScrollArea" name="scrollArea">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -244,8 +75,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>262</width>
-         <height>208</height>
+         <width>239</width>
+         <height>151</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
@@ -260,6 +91,44 @@
       </widget>
      </widget>
     </item>
+    <item row="0" column="0" rowspan="4">
+     <widget class="QGraphicsView" name="canvas">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>10</horstretch>
+        <verstretch>12</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(156, 156, 156);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2" rowspan="2">
+     <widget class="QFrame" name="Minicanvas">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>4</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -267,7 +136,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>854</width>
+     <width>992</width>
      <height>26</height>
     </rect>
    </property>
@@ -290,6 +159,8 @@
     <addaction name="separator"/>
     <addaction name="razpo"/>
     <addaction name="razpr"/>
+    <addaction name="zoomin"/>
+    <addaction name="zoomout"/>
    </widget>
    <widget class="QMenu" name="sloy">
     <property name="title">
@@ -322,18 +193,11 @@
     </property>
     <addaction name="glitch"/>
    </widget>
-   <widget class="QMenu" name="st">
-    <property name="title">
-     <string>Стикеры</string>
-    </property>
-    <addaction name="stadd"/>
-   </widget>
    <addaction name="file"/>
    <addaction name="holst"/>
    <addaction name="sloy"/>
    <addaction name="filter"/>
    <addaction name="eff"/>
-   <addaction name="st"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="open">
@@ -426,10 +290,20 @@
     <string>Сохранить как...</string>
    </property>
   </action>
+  <action name="zoomin">
+   <property name="text">
+    <string>Увеличить</string>
+   </property>
+  </action>
+  <action name="zoomout">
+   <property name="text">
+    <string>Уменьшить</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="../res.qrc"/>
-  <include location="../res.qrc"/>
+  <include location="res.qrc"/>
+  <include location="res.qrc"/>
  </resources>
  <connections/>
 </ui>
