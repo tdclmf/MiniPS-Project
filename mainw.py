@@ -17,9 +17,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFormLayout, QFrame,
-    QGraphicsView, QGridLayout, QLayout, QMainWindow,
-    QMenu, QMenuBar, QScrollArea, QSizePolicy,
-    QSpacerItem, QStatusBar, QVBoxLayout, QWidget)
+    QGraphicsView, QGridLayout, QLabel, QLayout,
+    QMainWindow, QMenu, QMenuBar, QScrollArea,
+    QSizePolicy, QSpacerItem, QStatusBar, QVBoxLayout,
+    QWidget)
 import res_rc
 import res_rc
 
@@ -120,31 +121,29 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.scrollArea, 3, 2, 2, 1)
 
-        self.canvas = QGraphicsView(self.centralwidget)
-        self.canvas.setObjectName(u"canvas")
-        self.canvas.setEnabled(True)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy2.setHorizontalStretch(10)
-        sizePolicy2.setVerticalStretch(12)
-        sizePolicy2.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
-        self.canvas.setSizePolicy(sizePolicy2)
-        self.canvas.setAcceptDrops(False)
-        self.canvas.setStyleSheet(u"background-color: rgb(156, 156, 156);")
 
-        self.gridLayout.addWidget(self.canvas, 0, 0, 4, 1)
-
-        self.Minicanvas = QFrame(self.centralwidget)
-        self.Minicanvas.setObjectName(u"Minicanvas")
+        self.frame = QFrame(self.centralwidget)
+        self.frame.setObjectName(u"frame")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         sizePolicy3.setHorizontalStretch(4)
         sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.Minicanvas.sizePolicy().hasHeightForWidth())
-        self.Minicanvas.setSizePolicy(sizePolicy3)
-        self.Minicanvas.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.Minicanvas.setFrameShape(QFrame.StyledPanel)
-        self.Minicanvas.setFrameShadow(QFrame.Raised)
+        sizePolicy3.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
+        self.frame.setSizePolicy(sizePolicy3)
+        self.frame.setMinimumSize(QSize(0, 0))
+        self.frame.setMaximumSize(QSize(16777215, 16777215))
+        self.frame.setStyleSheet(u"")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.gridLayout_2 = QGridLayout(self.frame)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.minicanvas = QLabel(self.frame)
+        self.minicanvas.setObjectName(u"minicanvas")
+        self.minicanvas.setStyleSheet(u"background-color: rgb(255, 255, 255);")
 
-        self.gridLayout.addWidget(self.Minicanvas, 0, 2, 2, 1)
+        self.gridLayout_2.addWidget(self.minicanvas, 0, 0, 1, 1)
+
+
+        self.gridLayout.addWidget(self.frame, 0, 2, 2, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -184,16 +183,12 @@ class Ui_MainWindow(object):
         self.holst.addAction(self.razpr)
         self.holst.addAction(self.zoomin)
         self.holst.addAction(self.zoomout)
-        self.sloy.addAction(self.copy)
-        self.sloy.addAction(self.paste)
         self.sloy.addSeparator()
         self.sloy.addAction(self.delmenu)
         self.sloy.addSeparator()
-        self.sloy.addAction(self.clear)
         self.filter.addAction(self.col.menuAction())
         self.filter.addAction(self.blur)
         self.col.addAction(self.bright)
-        self.col.addAction(self.colr)
         self.eff.addAction(self.glitch)
 
         self.retranslateUi(MainWindow)
@@ -224,6 +219,7 @@ class Ui_MainWindow(object):
         self.zoomin.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0432\u0435\u043b\u0438\u0447\u0438\u0442\u044c", None))
         self.zoomout.setText(QCoreApplication.translate("MainWindow", u"\u0423\u043c\u0435\u043d\u044c\u0448\u0438\u0442\u044c", None))
         self.movelayer.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u0435 \u0441\u043b\u043e\u044f", None))
+        self.minicanvas.setText("")
         self.file.setTitle(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b", None))
         self.holst.setTitle(QCoreApplication.translate("MainWindow", u"\u0425\u043e\u043b\u0441\u0442", None))
         self.sloy.setTitle(QCoreApplication.translate("MainWindow", u"\u0421\u043b\u043e\u0439", None))

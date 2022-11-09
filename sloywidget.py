@@ -15,18 +15,13 @@ class SloiWidget(QWidget):
         self.id_widget = id_widget
         self.ui.label.setText(f"Слой {str(id_widget)}")
         self.ui.deletesloy.clicked.connect(self.press_del)
-        self.isCurrent = False
+        self.current_layer = None
+        self.groupbox = self.ui.groupBox
 
     @Slot()
     def mousePressEvent(self, event):
-        if not self.isCurrent:
-            self.current_layer = self.id_widget
-            self.isCurrent = True
-            self.ui.groupBox.setStyleSheet(u"background-color: rgb(208, 228, 254);")
-        else:
-            self.current_layer = None
-            self.isCurrent = False
-            self.ui.groupBox.setStyleSheet(u"background-color: rgb(240, 240, 240);")
+        self.current_layer = self.id_widget
+        self.ui.groupBox.setStyleSheet(u"background-color: rgb(208, 228, 254);")
         self.cur.emit(self.current_layer)
 
 
