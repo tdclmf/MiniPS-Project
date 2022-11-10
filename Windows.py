@@ -11,6 +11,8 @@ from bcs import Ui_BCSwindow
 from blur import Ui_Blur
 from glitch import Ui_glitchwindow
 
+x = 0
+y = 0
 
 class BCSwindow(QDialog):
 
@@ -59,8 +61,11 @@ class Glitchwindow(QDialog):
 
 class View(QGraphicsView):
 
-    def mousePressEvent(self, event):
-        return event.x(), event.y()
+    def mouseMoveEvent(self, event):
+        global x
+        global y
+        x = event.x()
+        y = event.y()
 
 
 
@@ -79,6 +84,8 @@ class MainWindow(QMainWindow):
         self.ui.file.triggered.connect(self.openfile)
         self.ui.holst.triggered.connect(self.on_zoom_in)
         self.ui.holst.triggered.connect(self.on_zoom_out)
+        self.ui.sloy.triggered.connect(self.del_cur_layer)
+        self.ui.file.triggered.connect(self.save)
         self.layers_pillow = {}
         self.ui.zoomin.setShortcut('Ctrl+=')
         self.ui.zoomout.setShortcut('Ctrl+-')
@@ -181,6 +188,7 @@ class MainWindow(QMainWindow):
         else:
             self.current_layer = None
         self.ui.SloyWidget_layout.removeWidget(widget)
+        self.ui.minicanvas.setPixmap(QPixmap())
         self.update_canvas()
         widget.deleteLater()
 
@@ -188,10 +196,13 @@ class MainWindow(QMainWindow):
         self.ui.SloyWidget_layout.removeWidget(self.layers[self.current_layer])
         del self.layers[self.current_layer]
         del self.layers_pillow[self.current_layer]
+        del self.layers_coord[self.current_layer]
         if self.layers:
             self.current_layer = list(self.layers.keys())[0]
         else:
             self.current_layer = None
+        self.update_canvas()
+        self.layers[self.current_layer].deleteLater()
 
 
     @Slot()
@@ -206,9 +217,9 @@ class MainWindow(QMainWindow):
                 if dialog.val1 > 0:
                     self.sat(self.current_layer, dialog.val1)
                 if dialog.val2 > 0:
-                    self.brightness(self.current_layer, dialog.val2)
+                    self.contrast(self.current_layer, dialog.val2)
                 if dialog.val3 > 0:
-                    self.contrast(self.current_layer, dialog.val3)
+                    self.brightness(self.current_layer, dialog.val3)
             dialog.deleteLater()
 
 
@@ -249,11 +260,14 @@ class MainWindow(QMainWindow):
             self.canvass.setMouseTracking(False)
 
     def mov(self, x, y):
-        self.layers_coord[self.current_layer] = (x * 2, y * 2)
-        self.update_canvas()
+        if self.ui.movelayer.isChecked():
+            self.layers_coord[self.current_layer] = (x * 3, y * 3)
+            self.update_canvas()
 
     def mousePressEvent(self, event):
-        pass
+        global x
+        global y
+        self.mov(x, y)
 
     def mouseMoveEvent(self, event):
         pass
@@ -287,5 +301,9 @@ class MainWindow(QMainWindow):
             self.pic.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.new_canvas)))
             self.ui.minicanvas.setPixmap(QPixmap.fromImage(ImageQt.ImageQt(self.new_canvas)).scaledToHeight(self.ui.minicanvas.height()))
 
-
+    def save(self, action):
+        if action == self.ui.save and self.layers:
+            sname = QFileDialog.getSaveFileName(self, "Open file", f"c:\\Users\\{getpass.getuser()}\\Desktop.",
+                                            "Images (*.jpg *png *jpeg)")
+            self.new_canvas.save(sname[0])
 
